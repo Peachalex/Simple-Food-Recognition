@@ -1,14 +1,14 @@
 import  os
 from torch.utils.data import DataLoader
-from torchvision import datasets
+from torchvision import datasets,transforms
 
 NUM_WORKERS = os.cpu_count()
 
 def create_dataloaders(
         train_dir:str,
         test_dir:str,
-        train_transform,
-        test_transform,
+        train_transform:transforms.Compose,
+        test_transform:transforms.Compose,
         batch_size:int,
         num_workers:int=NUM_WORKERS,
 ):
