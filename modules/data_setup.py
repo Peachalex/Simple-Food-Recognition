@@ -3,13 +3,13 @@ from torch.utils.data import DataLoader
 from torchvision import datasets,transforms
 
 NUM_WORKERS = os.cpu_count()
-
+BATCH_SIZE = 32
 def create_dataloaders(
         train_dir:str,
         test_dir:str,
-        train_transform:transforms.Compose,
-        test_transform:transforms.Compose,
-        batch_size:int,
+        train_transform:transforms=None,
+        test_transform:transforms=None,
+        batch_size:int=BATCH_SIZE,
         num_workers:int=NUM_WORKERS,
 ):
     train_data = datasets.ImageFolder(train_dir, transform=train_transform)
