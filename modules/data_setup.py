@@ -7,8 +7,8 @@ BATCH_SIZE = 32
 def create_dataloaders(
         train_dir:str,
         test_dir:str,
-        train_transform:transforms.Compose,
-        test_transform:transforms.Compose,
+        train_transform:None,
+        test_transform:None,
         batch_size:int=BATCH_SIZE,
         num_workers:int=NUM_WORKERS,
 ):
