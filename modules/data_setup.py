@@ -28,6 +28,3 @@ def create_dataloaders(train_dir: str,
         shuffle=False,
         pin_memory=True,)
     return train_loader, test_loader,class_names
-
-import inspect
-print(inspect.signature(create_dataloaders))
