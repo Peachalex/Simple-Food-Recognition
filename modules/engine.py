@@ -1,7 +1,5 @@
-from os import close
-
 import torch
-from torch import optim,nn
+from torch import optim, nn
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 from typing import Dict,List,Tuple
@@ -17,7 +15,9 @@ def train_step(
     model.train()
     train_loss = 0
     train_acc = 0
-    for batch,(X,y) in enumerate(DataLoader):
+    for batch,(X, y) in enumerate(dataloader):
+        X = torch.tensor(X) # This is for correct data type
+        y = torch.tensor(y)
         X, y = X.to(device), y.to(device)
         y_pred = model(X)
         loss = loss_fn(y_pred, y)
@@ -43,7 +43,9 @@ def test_step(
     test_loss = 0
     test_acc = 0
     with torch.inference_mode():
-        for batch,(X, y) in enumerate(DataLoader):
+        for batch,(X, y) in enumerate(dataloader):
+            X = torch.tensor(X)
+            y = torch.tensor(y)
             X,y = X.to(device), y.to(device)
             test_pred_logits = model(X)
             loss = loss_fn(test_pred_logits, y)
