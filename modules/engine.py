@@ -16,8 +16,6 @@ def train_step(
     train_loss = 0
     train_acc = 0
     for batch,(X, y) in enumerate(dataloader):
-        X = torch.tensor(X) # This is for correct data type
-        y = torch.tensor(y)
         X, y = X.to(device), y.to(device)
         y_pred = model(X)
         loss = loss_fn(y_pred, y)
@@ -44,9 +42,6 @@ def test_step(
     test_acc = 0
     with torch.inference_mode():
         for batch,(X, y) in enumerate(dataloader):
-            X = torch.tensor(X)
-            y = torch.tensor(y)
-            X,y = X.to(device), y.to(device)
             test_pred_logits = model(X)
             loss = loss_fn(test_pred_logits, y)
             test_loss += loss.item()
@@ -66,7 +61,7 @@ def train(
         loss_fn: nn.Module,
         epochs: int,
         device: torch.device,
-        writer: torch.utils.tensorboard.SummaryWriter
+        writer: torch.utils.tensorboard.writer.SummaryWriter
 )-> Dict[str,List]:
     results = {
         "train_loss": [],
@@ -74,18 +69,18 @@ def train(
         "test_loss": [],
         "test_acc": [],
     }
-    for epoch in tqdm(range(epochs)):
+    for epoch in range(epochs):
         train_loss, train_acc = train_step(
-            model,
-            train_dataloader,
-            optimizer,
-            loss_fn,
-            device)
+            model=model,
+            dataloader=train_dataloader,
+            optimizer=optimizer,
+            loss_fn=loss_fn,
+            device=device)
         test_loss, test_acc = test_step(
-            model,
-            test_dataloader,
-            loss_fn,
-            device)
+            model=model,
+            dataloader=test_dataloader,
+            loss_fn=loss_fn,
+            device=device)
         print(f"Epoch {epoch+1}|"
               f" Train Loss: {train_loss:.3f}|"
               f" Train Acc: {train_acc:.3f}|"
