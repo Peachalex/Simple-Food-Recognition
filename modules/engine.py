@@ -16,7 +16,6 @@ def train_step(
     train_loss = 0
     train_acc = 0
     for batch,(X, y) in enumerate(dataloader):
-        X, y = X.to(device), y.to(device)
         y_pred = model(X)
         loss = loss_fn(y_pred, y)
         train_loss += loss.item()
