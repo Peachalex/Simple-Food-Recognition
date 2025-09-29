@@ -2,7 +2,6 @@ import  os
 from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision.transforms import Compose
-
 NUM_WORKERS = os.cpu_count()
 
 def create_dataloaders(train_dir: str,
