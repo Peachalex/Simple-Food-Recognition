@@ -9,7 +9,7 @@ def save_model(
     target_dir_path.mkdir(parents=True, exist_ok=True)
 
     assert model_name.endswith(".pth") or model_name.endswith(".pt"),"model name must end with .pth or .pt"
-    model_path = target_dir_path / model_name
+    model_save_path = target_dir_path / model_name
 
-    print(f"[INFO]Saving model to {model_path}")
-    torch.save(model.state_dict(), model_path)
+    print(f"[INFO]Saving model to {model_save_path}")
+    torch.save(model.state_dict(), model_save_path)
