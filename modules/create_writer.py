@@ -7,7 +7,7 @@ def create_writer(
         model_name: str,
         extra:str = None,
 ) -> torch.utils.tensorboard.SummaryWriter:
-    timestamp = datetime.now().strftime("%Y-%m-%d, %H-%M-%S")
+    timestamp = datetime.now().strftime("%Y-%m-%d")
 
     if extra:
         log_dir = os.path.join('runs', timestamp,experiment_name,model_name,extra)
