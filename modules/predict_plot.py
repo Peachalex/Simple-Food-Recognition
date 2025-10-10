@@ -1,22 +1,22 @@
 import torch
+import torchvision
 from torchvision import transforms
 from matplotlib import pyplot as plt
-from torch import nn
 from typing import List, Tuple
 from PIL import Image
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 def pred_and_plot_image(
-        model:nn.Module,
+        model:torch.nn.Module,
         image_path:str,
         class_names:List[str],
         image_size:Tuple[int,int]=(224,224),
-        transform:transforms = None,
+        transform:torchvision.transforms = None,
         device : torch.device = device,
 
 ):
     image = Image.open(image_path)
     if transform is not None:
-        image_transform = transforms
+        image_transform = transform
     else:
         image_transform = transforms.Compose([
             transforms.Resize(image_size),
