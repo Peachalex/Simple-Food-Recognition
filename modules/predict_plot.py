@@ -36,3 +36,4 @@ def pred_and_plot_image(
             plt.figure()
             plt.axis('off')
             plt.title(f"Predictions: {class_names[target_image_pred_labels]}|Probabilities: {target_image_pred_probs.max():.3f}")
+            plt.imshow(image)
